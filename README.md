@@ -28,8 +28,8 @@ copy .env.example .env
 
 ```bash
 OPENAI_API_KEY=你的 API Key
-OPENAI_BASE_URL=https://api.minimax.io/v1
-OPENAI_MODEL=MiniMax-M2.7
+OPENAI_BASE_URL=https://api.nonelinear.com/v1
+OPENAI_MODEL=kimi-k2.6
 PORT=3001
 ```
 
@@ -99,7 +99,7 @@ http://localhost:3001
 - 前端：Vite + React，适合快速实现可交互界面。
 - 后端：Express，接口简单直接。
 - 持久化：JSON 文件。这个任务的数据量小，用文件存储比引入数据库更轻，便于本地跑和代码审阅。
-- LLM：使用 OpenAI-compatible `chat/completions` 接口，方便替换模型或代理服务。
+- LLM：使用 OpenAI-compatible `chat/completions` 接口，当前本地验证使用 NoneLinear + `kimi-k2.6`，方便替换模型或代理服务。
 - 兜底：LLM 未配置时页面仍可打开，但新增便签和 AI 功能明确提示需要 API Key，避免把本地规则包装成 LLM。
 
 ## 3. AI 协作记录
@@ -110,7 +110,7 @@ http://localhost:3001
 
 第二步是拆成长任务。我把任务拆成可验证的小步骤：先能读取和保存便签，再能结构化触发 AI 反馈，再接入前端交互，最后补异常处理、状态保存和交互体验。
 
-第三步是防止停留在 demo。我不会只看它能不能跑一次，而会验证关键链路：数据刷新后是否保留、LLM 失败时是否有 fallback、前后端联调是否稳定、生产构建是否能启动。
+第三步是防止停留在 demo。我不会只看它能不能跑一次，而会验证关键链路：数据刷新后是否保留、LLM 失败时是否明确报错且不保存伪结果、前后端联调是否稳定、生产构建是否能启动。
 
 最后沉淀的不是某个 prompt，而是一套流程：`spec → task decomposition → tool use → verification → iteration`。这样换到别的业务场景，也能复用这套方式。
 
@@ -134,7 +134,7 @@ http://localhost:3001
 
 - 功能主链路：已完成。
 - 后端持久化：已完成。
-- LLM 接入和 fallback：已完成。
+- LLM 接入和失败保护：已完成。
 - 大画布缩放和热门精选：已完成。
 - 文档和本地验证：已完成。
 - 需要提交前人工确认：配置真实 `OPENAI_API_KEY` 后新增一张便签，并测试墙面总结/关联/下一句建议。

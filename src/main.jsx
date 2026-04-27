@@ -437,7 +437,7 @@ function App() {
                 <p className="mood">{insight.mood}</p>
                 <p className="thought">{insight.thought}</p>
                 <p className="prompt">{insight.prompt}</p>
-                <small>{insight.source === 'llm' ? '由 LLM 读完整面墙后生成' : '先用本地直觉回应你，配置 API Key 后会读得更深'}</small>
+                <small>{insight.source === 'llm' ? '由 LLM 读完整面墙后生成' : '等待 LLM 听见这面墙'}</small>
               </>
             ) : (
               <div className="insightEmpty">
